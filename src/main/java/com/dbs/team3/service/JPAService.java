@@ -18,7 +18,7 @@ public class JPAService {
 	public String validateSender(String no) {
 		
 		Sender sender = senderRepo.findByaccno(no);
-		
+		System.out.println(sender);
 		if(sender != null) return null;
 		else return "Transcation failed";
 			
