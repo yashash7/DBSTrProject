@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Sender {
+public class Customer {
 	@Id
 	String accno;
 	String name;
@@ -38,14 +38,14 @@ public class Sender {
 	public String toString() {
 		return "Sender [accno=" + accno + ", name=" + name + ", balance=" + balance + ", overdraft=" + overdraft + "]";
 	}
-	public Sender(String accno, String name, double balance, String overdraft) {
+	public Customer(String accno, String name, double balance, String overdraft) {
 		super();
 		this.accno = accno;
 		this.name = name;
 		this.balance = balance;
 		this.overdraft = overdraft;
 	}
-	public Sender() {
+	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

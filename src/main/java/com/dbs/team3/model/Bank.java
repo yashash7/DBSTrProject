@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Receiver {
+public class Bank {
 	@Id
 	String bic;
 	String bank;
@@ -24,12 +24,12 @@ public class Receiver {
 	public String toString() {
 		return "Receiver [bic=" + bic + ", bank=" + bank + "]";
 	}
-	public Receiver(String bic, String bank) {
+	public Bank(String bic, String bank) {
 		super();
 		this.bic = bic;
 		this.bank = bank;
 	}
-	public Receiver() {
+	public Bank() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
