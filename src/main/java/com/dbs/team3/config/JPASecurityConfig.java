@@ -34,6 +34,7 @@ public class JPASecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll()
 		.antMatchers("/user").hasAnyAuthority("ADMIN", "USER", "EMPLOYEE")
 		.antMatchers("/sender/validation").hasAnyAuthority("EMPLOYEE", "ADMIN")
+		.antMatchers("/receiver/validation").hasAnyAuthority("EMPLOYEE", "ADMIN")
 		.antMatchers("/admin").hasAuthority("ADMIN")
 		.and()
 		.headers().frameOptions().disable()

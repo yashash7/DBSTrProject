@@ -3,14 +3,14 @@ package com.dbs.team3.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.OnError;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dbs.team3.model.Customer;
 import com.dbs.team3.service.JPAService;
 
 @RestController
@@ -26,8 +26,19 @@ public class Controller {
 	}
 	
 	@GetMapping("/sender/validation")
-	public String validationSender(@RequestParam String no) {
-		return jpaService.validateSender(no);
+	public String validationSender(@RequestParam String accno) {
+		return jpaService.validateSender(accno);
+	}
+	@GetMapping("/receiver/validation")
+	public String checkReceiverNameInOFAC(@RequestParam String name) {
+		return jpaService.checkReceiverNameInOFAC(name);
+	}
+	
+	@RequestMapping("/transaction")
+	public String doTransaction(@RequestParam String senderAccno, String receiverAccno, double amount) {
+		Customer sender = jpaService.getCustomer(senderAccno);
+		Customer receiver = jpaService.getCustomer(receiverAccno);
+		return jpaService.transaction(sender, receiver, amount);
 	}
 	
 	@RequestMapping("/user")
