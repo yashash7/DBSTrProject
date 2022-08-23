@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.dbs.team3.model.Customer;
 import com.dbs.team3.service.JPAService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class Controller {
 	
 	@Autowired
@@ -22,13 +24,21 @@ public class Controller {
 	
 	@RequestMapping("/")
 	public String home() {
+		System.out.println("Home Called");
 		return "***   WELCOME TO TEAM3's REST API SERVICES   ***";
 	}
 	
-	@GetMapping("/sender/validation")
+	@RequestMapping("/sender/validation")
 	public String validationSender(@RequestParam String accno) {
 		return jpaService.validateSender(accno);
 	}
+	@RequestMapping("/senderName")
+	public String getSenderName(@RequestParam String accno) {
+		Customer senderForName = jpaService.getCustomer(accno);
+		System.out.println("AutofillSenderName: "+senderForName.getName());
+		return senderForName.getName();
+	}
+	
 	@GetMapping("/receiver/validation")
 	public String checkReceiverNameInOFAC(@RequestParam String name) {
 		return jpaService.checkReceiverNameInOFAC(name);
