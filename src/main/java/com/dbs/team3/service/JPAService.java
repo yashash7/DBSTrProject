@@ -31,9 +31,9 @@ public class JPAService {
 		Customer customer = customerRepo.findByaccno(accno);
 		return customer;
 	}
-	public Bank getBankByBic(String bic) {
+	public String getBankByBic(String bic) {
 		Bank bank = bankRepo.findByBic(bic);
-		return bank;
+		return bank.getBank();
 	}
 	
 	public String validateSender(String accno) {
