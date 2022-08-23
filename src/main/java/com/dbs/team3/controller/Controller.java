@@ -61,6 +61,12 @@ public class Controller {
 		return "Welcome to Employee Page";
 	}
 	
+	@RequestMapping("/receiver/bank")
+	public String getBankByBic(@RequestParam String bic) {
+		return jpaService.getBankByBic(bic);
+	}
+	
+	
 	@RequestMapping("/admin")
 	public List<String> allEndpoints() {
 		List<String> endPointsList = new ArrayList<String>();
