@@ -39,9 +39,13 @@ public class JPAService {
 	public String validateSender(String accno) {
 		Customer sender = getCustomer(accno);
 		System.out.println(sender);
-		if(sender != null) return "Sender Valid, Proceed to next step";
-		else return "Sender Invalid -> Abort Transaction!";
+		if(sender != null) return "GREEN";
+		else return "RED";
+//		if(sender != null) return "Sender Valid, Proceed to next step";
+//		else return "Sender Invalid -> Abort Transaction!";
 	}
+	
+	
 	public String checkReceiverNameInOFAC(String receiverName) {
 		int indexOfReceiverInOFAC = ofacList.indexOf(receiverName);
 		if(indexOfReceiverInOFAC>-1) return "Receiver Present in OFAC List -> Abort Transaction!";
@@ -52,9 +56,9 @@ public class JPAService {
 		String msg = "";
 		try {
 			sender.setBalance(sender.getBalance()-amount);
-			receiver.setBalance(receiver.getBalance()+amount);
+//			receiver.setBalance(receiver.getBalance()+amount);
 			customerRepo.save(sender);
-			customerRepo.save(receiver);
+//			customerRepo.save(receiver);
 			msg = "Transaction Success";
 			
 		} catch(Exception e) {
