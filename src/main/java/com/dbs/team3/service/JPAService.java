@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.dbs.team3.model.Bank;
 import com.dbs.team3.model.Customer;
+import com.dbs.team3.model.RawData;
+import com.dbs.team3.model.Transaction;
 import com.dbs.team3.repo.BankRepo;
 import com.dbs.team3.repo.CustomerRepo;
+import com.dbs.team3.repo.TransactionRepo;
 @Service
 public class JPAService {
 	
-	static List<String> ofacList = new ArrayList<String>();
-	static {
-		ofacList.add("ANUPAMA N");
-		ofacList.add("AJAY SHAMU KUMAR");
-		ofacList.add("B A SANTOSH");
-		ofacList.add("ANIL KUMAR NAGARAJ");
-		ofacList.add("AKSHAYA WEALTH MANAGEMENT (P) LTD");
-	}
+	@Autowired
+	TransactionRepo transactionRepo;
+	
+	Transaction transaction=new Transaction();
+	
 
 	@Autowired
 	CustomerRepo customerRepo;
@@ -33,42 +33,40 @@ public class JPAService {
 	}
 	public String getBankByBic(String bic) {
 		Bank bank = bankRepo.findByBic(bic);
+		transaction.setReceiverBIC(bic);
+		transaction.setBankName(bank.getBank());
 		if(bank!=null) return bank.getBank();
 		else return "RED";
 	}
 	
 	public String validateSender(String accno) {
+		transaction.setSenderAccNo(accno);
 		Customer sender = getCustomer(accno);
 		System.out.println(sender);
-		if(sender != null) return "GREEN";
-		else return "RED";
+		if(sender != null) {
+			return "GREEN";
+		}
+		else {
+			transaction.setStatus("Failed due to invalid sender!!!!");
+			return "RED";
+		}
 //		if(sender != null) return "Sender Valid, Proceed to next step";
 //		else return "Sender Invalid -> Abort Transaction!";
 	}
 	
 	
 	public String checkReceiverNameInOFAC(String receiverName) {
-		int indexOfReceiverInOFAC = ofacList.indexOf(receiverName);
-		if(indexOfReceiverInOFAC>-1) return "RED";
+		transaction.setReceiverName(receiverName);
+		int indexOfReceiverInOFAC = RawData.ofacList.indexOf(receiverName);
+		if(indexOfReceiverInOFAC>-1) {
+			transaction.setStatus("Failed!. Receiver present in terror group. ");
+			return "RED";
+		}
 		return "GREEN";
 //		if(indexOfReceiverInOFAC>-1) return "Receiver Present in OFAC List -> Abort Transaction!";
 //		return "Receiver valid, Proceed to the transaction";
 	}
 	
-	public String transaction(Customer sender, Customer receiver, double amount) {
-		String msg = "";
-		try {
-			sender.setBalance(sender.getBalance()-amount);
-//			receiver.setBalance(receiver.getBalance()+amount);
-			customerRepo.save(sender);
-//			customerRepo.save(receiver);
-			msg = "Transaction Success";
-			
-		} catch(Exception e) {
-			msg = "Transaction Failed";
-		}
-		return msg;
-	}
 	public String checkSenderBalance(String accno, double amount) {
 		// TODO Auto-generated method stub
 		Customer senderForBalance = getCustomer(accno);
@@ -78,6 +76,12 @@ public class JPAService {
 			return "GREEN"; 
 		return "RED";
 		
+	}
+	
+	public String getSenderName(String accno) {
+		Customer senderForName = getCustomer(accno);
+		transaction.setSenderName(senderForName.getName());
+		return senderForName.getName();
 	}
 
 }
