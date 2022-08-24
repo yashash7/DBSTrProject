@@ -33,7 +33,8 @@ public class JPAService {
 	}
 	public String getBankByBic(String bic) {
 		Bank bank = bankRepo.findByBic(bic);
-		return bank.getBank();
+		if(bank!=null) return bank.getBank();
+		else return "RED";
 	}
 	
 	public String validateSender(String accno) {
@@ -48,8 +49,10 @@ public class JPAService {
 	
 	public String checkReceiverNameInOFAC(String receiverName) {
 		int indexOfReceiverInOFAC = ofacList.indexOf(receiverName);
-		if(indexOfReceiverInOFAC>-1) return "Receiver Present in OFAC List -> Abort Transaction!";
-		return "Receiver valid, Proceed to the transaction";
+		if(indexOfReceiverInOFAC>-1) return "RED";
+		return "GREEN";
+//		if(indexOfReceiverInOFAC>-1) return "Receiver Present in OFAC List -> Abort Transaction!";
+//		return "Receiver valid, Proceed to the transaction";
 	}
 	
 	public String transaction(Customer sender, Customer receiver, double amount) {
@@ -65,6 +68,16 @@ public class JPAService {
 			msg = "Transaction Failed";
 		}
 		return msg;
+	}
+	public String checkSenderBalance(String accno, double amount) {
+		// TODO Auto-generated method stub
+		Customer senderForBalance = getCustomer(accno);
+		if(senderForBalance.getOverdraft()=="yes")
+			return "GREEN";
+		else if(senderForBalance.getBalance()>=amount)
+			return "GREEN"; 
+		return "RED";
+		
 	}
 
 }

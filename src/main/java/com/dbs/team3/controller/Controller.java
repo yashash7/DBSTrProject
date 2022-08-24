@@ -66,6 +66,10 @@ public class Controller {
 		return jpaService.getBankByBic(bic);
 	}
 	
+	@RequestMapping("/checkBalance")
+	public String checkSenderBalance(@RequestParam String accno, double amount) {
+		return jpaService.checkSenderBalance(accno, amount);
+	}
 	
 	@RequestMapping("/admin")
 	public List<String> allEndpoints() {
