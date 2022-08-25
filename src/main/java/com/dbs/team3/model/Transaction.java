@@ -14,6 +14,7 @@ public class Transaction {
 	String receiverAccNo;
 	String receiverName;  
 	String bankName;
+	double amount;
 	String messageInstruction;
 	String status; // pass or fail
 	String messageCode;
@@ -77,16 +78,15 @@ public class Transaction {
 	public void setMessageCode(String messageCode) {
 		this.messageCode = messageCode;
 	}
-	@Override
-	public String toString() {
-		return "Transaction [transactionId=" + transactionId + ", senderAccNo=" + senderAccNo + ", senderName="
-				+ senderName + ", receiverBIC=" + receiverBIC + ", receiverAccNo=" + receiverAccNo + ", receiverName="
-				+ receiverName + ", bankName=" + bankName + ", messageInstruction=" + messageInstruction + ", status="
-				+ status + ", messageCode=" + messageCode + "]";
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 	public Transaction(int transactionId, String senderAccNo, String senderName, String receiverBIC,
-			String receiverAccNo, String receiverName, String bankName, String messageInstruction, String status,
-			String messageCode) {
+			String receiverAccNo, String receiverName, String bankName, double amount, String messageInstruction,
+			String status, String messageCode) {
 		super();
 		this.transactionId = transactionId;
 		this.senderAccNo = senderAccNo;
@@ -95,6 +95,7 @@ public class Transaction {
 		this.receiverAccNo = receiverAccNo;
 		this.receiverName = receiverName;
 		this.bankName = bankName;
+		this.amount = amount;
 		this.messageInstruction = messageInstruction;
 		this.status = status;
 		this.messageCode = messageCode;
@@ -102,6 +103,13 @@ public class Transaction {
 	public Transaction() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Transaction [transactionId=" + transactionId + ", senderAccNo=" + senderAccNo + ", senderName="
+				+ senderName + ", receiverBIC=" + receiverBIC + ", receiverAccNo=" + receiverAccNo + ", receiverName="
+				+ receiverName + ", bankName=" + bankName + ", amount=" + amount + ", messageInstruction="
+				+ messageInstruction + ", status=" + status + ", messageCode=" + messageCode + "]";
 	}
 	
 	

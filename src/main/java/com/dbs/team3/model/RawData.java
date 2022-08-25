@@ -16,7 +16,7 @@ public class RawData {
 		ofacList.add("AKSHAYA WEALTH MANAGEMENT (P) LTD");
 	}
 	
-	static Map<String,String> messageMap = new HashMap<String,String>();
+	public static Map<String,String> messageMap = new HashMap<String,String>();
 	static {
 		messageMap.put("CHQB", "Beneficiary customer must be paid by cheque only.");
 		messageMap.put("CORT", "Payment is made in settlement for a trade.");
@@ -28,5 +28,13 @@ public class RawData {
 		messageMap.put("REPA", "Payments has a related e-Payments reference.");
 		messageMap.put("SDVA", "Payment must be executed with same day.");
 	}
+	
+	public static Map<String, String> statusMap = new HashMap<String, String>();
+	static {
+		statusMap.put("insufficientFunds", "' FAILED ' -> Insufficient Funds");
+		statusMap.put("receiverInTerror", "' FAILED ' -> Receiver Present in Terrr List");
+		statusMap.put("success", "Transaction Success");
+	}
+	
 
 }
