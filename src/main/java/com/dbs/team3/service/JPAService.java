@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dbs.team3.model.Bank;
 import com.dbs.team3.model.Customer;
+import com.dbs.team3.model.MissingFields;
 import com.dbs.team3.model.RawData;
 import com.dbs.team3.model.Transaction;
 import com.dbs.team3.repo.BankRepo;
@@ -18,70 +19,71 @@ public class JPAService {
 	
 	@Autowired
 	TransactionRepo transactionRepo;
-	
-	Transaction transaction=new Transaction();
-	
-
 	@Autowired
 	CustomerRepo customerRepo;
 	@Autowired
 	BankRepo bankRepo;
 	
-	public Customer getCustomer(String accno) {
-		Customer customer = customerRepo.findByaccno(accno);
-		return customer;
+	Transaction transaction = new Transaction();
+	Customer sender = new Customer();
+	static int trId = 101;
+	
+	public void doTransaction(List<String> missing) {
+		//Setting messageCode
+		transaction.setReceiverAccNo(missing.get(3));
+		transaction.setMessageCode(missing.get(0));
+		transaction.setMessageInstruction(RawData.messageMap.get(transaction.getMessageCode()));
+		transaction.setAmount(Double.parseDouble(missing.get(1)));
+		transaction.setTransactionId(trId++);
+		if(transaction.getStatus()=="insufficientFunds" || transaction.getStatus()=="receiverInTerror") {
+			transaction.setStatus(RawData.statusMap.get(missing.get(2)));
+			transactionRepo.save(transaction);
+			System.out.println(transaction.toString());
+		}
+		else {
+			transaction.setStatus(RawData.statusMap.get(missing.get(2)));
+			sender.setBalance(sender.getBalance()-transaction.getAmount());
+			customerRepo.save(sender);
+			transactionRepo.save(transaction);
+			System.out.println(transaction.toString());
+		}
 	}
-	public String getBankByBic(String bic) {
-		Bank bank = bankRepo.findByBic(bic);
-		transaction.setReceiverBIC(bic);
-		transaction.setBankName(bank.getBank());
-		if(bank!=null) return bank.getBank();
+	
+	// Sender Functions
+	public Customer getCustomer(String accno) {
+		return customerRepo.findByaccno(accno);
+	}
+	public String validateSender(String accno) {
+		transaction.setSenderAccNo(accno);
+		sender = customerRepo.findByaccno(accno);
+		if(sender!=null) {
+			transaction.setSenderName(sender.getName());
+			return sender.getName();
+		}
 		else return "RED";
 	}
 	
-	public String validateSender(String accno) {
-		transaction.setSenderAccNo(accno);
-		Customer sender = getCustomer(accno);
-		System.out.println(sender);
-		if(sender != null) {
-			return "GREEN";
+	// Receiver Functions
+	public String getBankByBic(String bic) {
+		Bank bank = bankRepo.findByBic(bic);
+		System.out.println(bank);
+		transaction.setReceiverBIC(bic);
+		if(bank!=null) {
+			transaction.setBankName(bank.getBank());
+			return bank.getBank();
 		}
-		else {
-			transaction.setStatus("Failed due to invalid sender!!!!");
-			return "RED";
-		}
-//		if(sender != null) return "Sender Valid, Proceed to next step";
-//		else return "Sender Invalid -> Abort Transaction!";
-	}
-	
-	
+		else return "RED";
+//		return null;
+	}	
 	public String checkReceiverNameInOFAC(String receiverName) {
 		transaction.setReceiverName(receiverName);
 		int indexOfReceiverInOFAC = RawData.ofacList.indexOf(receiverName);
 		if(indexOfReceiverInOFAC>-1) {
-			transaction.setStatus("Failed!. Receiver present in terror group. ");
 			return "RED";
 		}
 		return "GREEN";
 //		if(indexOfReceiverInOFAC>-1) return "Receiver Present in OFAC List -> Abort Transaction!";
 //		return "Receiver valid, Proceed to the transaction";
-	}
-	
-	public String checkSenderBalance(String accno, double amount) {
-		// TODO Auto-generated method stub
-		Customer senderForBalance = getCustomer(accno);
-		if(senderForBalance.getOverdraft()=="yes")
-			return "GREEN";
-		else if(senderForBalance.getBalance()>=amount)
-			return "GREEN"; 
-		return "RED";
-		
-	}
-	
-	public String getSenderName(String accno) {
-		Customer senderForName = getCustomer(accno);
-		transaction.setSenderName(senderForName.getName());
-		return senderForName.getName();
 	}
 
 }
