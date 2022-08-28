@@ -1,5 +1,7 @@
 package com.dbs.team3.controller;
 
+import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.team3.model.Customer;
 import com.dbs.team3.model.MissingFields;
+import com.dbs.team3.model.Transaction;
 import com.dbs.team3.service.JPAService;
 
 @RestController
@@ -22,6 +25,19 @@ public class Controller {
 	
 	@Autowired
 	JPAService jpaService;
+	
+	
+	@GetMapping("/transbyacc")
+	public List<Transaction> transbyacc(@RequestParam String accno) {
+		return jpaService.transbyacc(accno);
+	}
+	
+	
+	@GetMapping("/auth")
+    public String auth(@RequestParam String username, String password) {
+        return jpaService.login(username,password);
+        
+    }
 	
 	@RequestMapping("/validateSender")
 	public String validateSender(@RequestParam String accno) {

@@ -32,7 +32,7 @@ public class JPASecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/validateSender", "/getSender", "/receiverNameCheck", "/receiverBank", "/transaction").permitAll()
+		.antMatchers("/validateSender", "/getSender", "/receiverNameCheck", "/receiverBank", "/transaction", "/auth", "/transbyacc", "/date").permitAll()
 //		.antMatchers("/user").hasAnyAuthority("ADMIN", "USER", "EMPLOYEE")
 //		.antMatchers("/sender/validation").hasAnyAuthority("EMPLOYEE", "ADMIN")
 //		.antMatchers("/receiver/validation").hasAnyAuthority("EMPLOYEE", "ADMIN")
