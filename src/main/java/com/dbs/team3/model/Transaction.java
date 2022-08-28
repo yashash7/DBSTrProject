@@ -10,14 +10,15 @@ public class Transaction {
 	int transactionId;
 	String senderAccNo;
 	String senderName;
-	String receiverBIC;
 	String receiverAccNo;
-	String receiverName;  
+	String receiverName;
+	String receiverBIC;  
 	String bankName;
 	double amount;
+	String messageCode;
 	String messageInstruction;
 	String status; // pass or fail
-	String messageCode;
+	String timeStamp;
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -84,34 +85,43 @@ public class Transaction {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Transaction(int transactionId, String senderAccNo, String senderName, String receiverBIC,
-			String receiverAccNo, String receiverName, String bankName, double amount, String messageInstruction,
-			String status, String messageCode) {
-		super();
-		this.transactionId = transactionId;
-		this.senderAccNo = senderAccNo;
-		this.senderName = senderName;
-		this.receiverBIC = receiverBIC;
-		this.receiverAccNo = receiverAccNo;
-		this.receiverName = receiverName;
-		this.bankName = bankName;
-		this.amount = amount;
-		this.messageInstruction = messageInstruction;
-		this.status = status;
-		this.messageCode = messageCode;
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	public Transaction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Transaction(int transactionId, String senderAccNo, String senderName, String receiverAccNo,
+			String receiverName, String receiverBIC, String bankName, double amount, String messageCode,
+			String messageInstruction, String status, String timeStamp) {
+		super();
+		this.transactionId = transactionId;
+		this.senderAccNo = senderAccNo;
+		this.senderName = senderName;
+		this.receiverAccNo = receiverAccNo;
+		this.receiverName = receiverName;
+		this.receiverBIC = receiverBIC;
+		this.bankName = bankName;
+		this.amount = amount;
+		this.messageCode = messageCode;
+		this.messageInstruction = messageInstruction;
+		this.status = status;
+		this.timeStamp = timeStamp;
+	}
 	@Override
 	public String toString() {
 		return "Transaction [transactionId=" + transactionId + ", senderAccNo=" + senderAccNo + ", senderName="
-				+ senderName + ", receiverBIC=" + receiverBIC + ", receiverAccNo=" + receiverAccNo + ", receiverName="
-				+ receiverName + ", bankName=" + bankName + ", amount=" + amount + ", messageInstruction="
-				+ messageInstruction + ", status=" + status + ", messageCode=" + messageCode + "]";
+				+ senderName + ", receiverAccNo=" + receiverAccNo + ", receiverName=" + receiverName + ", receiverBIC="
+				+ receiverBIC + ", bankName=" + bankName + ", amount=" + amount + ", messageCode=" + messageCode
+				+ ", messageInstruction=" + messageInstruction + ", status=" + status + ", timeStamp=" + timeStamp
+				+ "]";
 	}
+
 	
-	
+		
 	
 }

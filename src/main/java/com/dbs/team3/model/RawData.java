@@ -31,9 +31,9 @@ public class RawData {
 	
 	public static Map<String, String> statusMap = new HashMap<String, String>();
 	static {
-		statusMap.put("insufficientFunds", "' FAILED ' -> Insufficient Funds");
-		statusMap.put("receiverInTerror", "' FAILED ' -> Receiver Present in Terrr List");
-		statusMap.put("success", "Transaction Success");
+		statusMap.put("insufficientFunds", "FAILED! INSUFFICIENT FUNDS");
+		statusMap.put("receiverInTerror", "FAILED! RECEIVER NAME IN TERRR LIST");
+		statusMap.put("success", "SUCCESS! TRANSACTION COMPLETED SUCCESSFULLY");
 	}
 	
 

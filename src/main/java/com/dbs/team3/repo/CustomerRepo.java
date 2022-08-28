@@ -4,8 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.dbs.team3.model.Customer;
 
-public interface CustomerRepo extends JpaRepository<Customer, Integer>{
-
-	Customer findByaccno(String accno);
-
+public interface CustomerRepo extends JpaRepository<Customer, String>{
 }
