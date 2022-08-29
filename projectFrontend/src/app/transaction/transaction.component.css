@@ -1,0 +1,17 @@
+* {
+    font-size: small;
+}
+
+table {
+    /* text-align: center; */
+    margin: auto auto;
+    width: 90%;
+  }
+
+  .tr {
+    padding: 15px;
+  }
+
+  .red {
+    background-color: #dc3545;
+  }

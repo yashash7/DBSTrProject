@@ -1,0 +1,23 @@
+* {
+  margin-top: -50px;
+}
+
+.buttons {
+    width: 500px;
+    margin:  auto;
+    
+    text-align: center;
+    margin-top: 200px;
+  }
+  
+  .action_btn {
+    position: fixed;bottom: 120px;
+    display: inline-block;
+    width: calc(100% - 54px);
+    margin: 100 auto;
+    background-color: navy;
+    color: white;
+  }
+  .imgmain{
+    position: relative;left:520px;top: 200px ;
+  }
