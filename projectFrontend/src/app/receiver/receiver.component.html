@@ -1,0 +1,69 @@
+<html>
+  <head> 
+    <style>
+      div {
+        margin-bottom: 10px;
+      }
+      
+      label {
+        display: inline-block;
+        color:blue;
+        width: 150px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body style="text-align:right">
+ <div class="imgmain">
+   <h1 style="text-align: left;">hi</h1>
+    <img src="https://dr5dymrsxhdzh.cloudfront.net/blog/images/a47013843/2018/10/people-sending-and-receiving-money-wirelessly-vector-id628883362.jpg">
+  </div>   
+    <h1 style="color: rgb(180, 139, 76);position:fixed;left: 810px; right: 100px; top: 90px;">RECEIVER DETAILS</h1>
+    <br><div fxLayoutAlign="center center" >
+	  <mat-card style="background-color: rgb(135, 222, 208); position:fixed;left: 850px; right: 30px;bottom:10px;">
+      <mat-toolbar style="border-radius: 10px;" color="secondary" fxLayoutAlign="center center">RECEIVER DETAILS</mat-toolbar>
+		<br><form fxLayoutAlign="stretch" fxLayout="column" style="color: burlywood;">
+      <div>
+        <label>ACCOUNT NUMBER</label>
+        <input type="text" id="accno" [(ngModel)]="receiverAccNo" name="receiverAccNo" placeholder="enter receiver acc no" />
+      </div>
+      <div>
+        <label>RECEIVER NAME</label>
+        <input type="text"id="name" [(ngModel)]="receiverName" name="receiverName" placeholder="enter receiver" (change)="receiverNameCheck()" />
+      </div>
+      <div>
+        <label>Receiver BIC</label>
+        <input type="text"id="bic" [(ngModel)]="receiverBic" name="receiverBic" placeholder="enter bic" (change)="receiverBankByBicAuto()" />
+      </div>
+      <div>
+        <label>BANK NAME</label>
+        <input type="text" id="bankname" [(ngModel)]="receiverBank" name="receiverBank" placeholder="Receiver Bank" disabled />
+      </div>
+      <div>
+        <label>AMOUNT </label>
+        <input type="text" id="amount" [(ngModel)]="amount" name="amount" placeholder="enter amount to send" (change)="checkBalanceOrOd()" />
+      </div>
+      <div style="text-align: justify; margin-left: 11px;">
+        <label for="list">MESSAGE CODE:</label>
+        <select [(ngModel)]="messageCode" name="messageCode" id="message">
+            <option value="CHQB">CHQB</option>
+            <option value="CORT">CORT</option>
+            <option value="HOLD">HOLD</option>
+            <option value="INTC">INTC</option>
+            <option value="PHOB">PHOB</option>
+            <option value="PHOI">PHOI</option>
+            <option value="PHON">PHON</option>
+            <option value="REPA">REPA</option>
+            <option value="SDVA">SDVA</option>
+        </select> 
+      </div>
+      <br>
+  <button (click)="proceedToTransaction()" style="background-color:rgb(197, 188, 107);padding: 5px;width:50%;margin: auto auto;" type="submit" value="continue transaction">Submit</button>
+    </form>
+    </mat-card>
+    </div>
+  </body>
+</html>
+
+  
+  

@@ -1,0 +1,36 @@
+* {
+    border-radius: 100px;
+  }
+  
+  .head{
+      margin-top: 100px;
+  }
+  .accno{
+      margin:  auto;
+      color:black;
+      text-align: center;    
+  
+  }
+  .action_btn {
+      
+      background-color:green;
+    }
+  .container
+  {
+    float: right;
+    margin-right: 10%;
+    margin-top: 3%;
+  
+    size: auto;
+    /* vertical-align: middle; */
+   
+    /* position: relative;left:250px;bottom: 400px; */
+  }
+  
+  .imgmain{
+    /* position: relative;right: 205px; */
+    float: left;
+    margin-left: 5%;
+    margin-top: 5%;
+    
+  }

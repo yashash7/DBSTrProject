@@ -1,0 +1,81 @@
+
+<br>
+<h3 style="text-align: justify; margin-left: 5%;">
+  <button mat-raised-button color="accent">
+    SENDER: &nbsp; {{dataSource[0].senderName}} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    ACCOUNT: &nbsp; {{dataSource[0].senderAccNo}}
+  </button>
+    <button style="float: right; margin-right: 5%;" mat-raised-button  (click)="goToForms()"> Make Another Transaction </button>
+</h3>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="transactionId">
+      <th mat-header-cell *matHeaderCellDef class="tr"> Transaction ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.transactionId}} </td>
+    </ng-container>
+    
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="receiverAccNo">
+      <th mat-header-cell *matHeaderCellDef class="tr"> Receiver Account Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.receiverAccNo}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="receiverName">
+      <th mat-header-cell *matHeaderCellDef class="tr"> Receiver Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.receiverName}} </td>
+    </ng-container>
+  
+    <!-- BIC Column -->
+    <ng-container matColumnDef="receiverBIC">
+      <th mat-header-cell *matHeaderCellDef class="tr"> BIC </th>
+      <td mat-cell *matCellDef="let element" style="padding-right: 25px;"> {{element.receiverBIC}} </td>
+    </ng-container>
+
+    <!-- bankName Column -->
+    <ng-container matColumnDef="bankName">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Receiver Bank Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.bankName}} </td>
+    </ng-container>
+
+    <!-- amount Column -->
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Amount </th>
+        <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.amount}} </td>
+    </ng-container>
+
+    <!-- messageCode Column -->
+    <ng-container matColumnDef="messageCode">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Mode of Transfer </th>
+        <td mat-cell *matCellDef="let element"> {{element.messageCode}} </td>
+      </ng-container>
+
+      <!-- messageInstruction Column -->
+    <ng-container matColumnDef="messageInstruction">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Message Instruction </th>
+        <td mat-cell *matCellDef="let element" style="padding-right: 25px;"> {{element.messageInstruction | titlecase}} </td>
+    </ng-container>
+
+    <!-- status Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Status </th>
+        <td mat-cell *matCellDef="let element">{{element.status | uppercase}} </td>
+      </ng-container>
+
+      <!-- date Column -->
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="tr"> Date </th>
+        <td mat-cell *matCellDef="let element" class="tr"> {{element.timeStamp | date:"short"}} </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

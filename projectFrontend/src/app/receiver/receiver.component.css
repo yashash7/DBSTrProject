@@ -1,0 +1,27 @@
+.imgmain{
+    position: fixed;
+    right: 600px;
+    top: -10px;
+    
+  }
+  *{
+    border-radius: 100px;
+  }
+  input{
+    padding: 5px;
+    border-radius: 50px;
+  }
+  
+  button:hover {
+    cursor: pointer;
+  }
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
