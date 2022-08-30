@@ -36,7 +36,7 @@ export class ApiCallerService {
     res.subscribe((data)=>{
       localStorage.setItem("authUser",data)
       if(localStorage.getItem("authUser") == "postive") {
-        this.router.navigateByUrl("/forms")
+        this.router.navigateByUrl("/sender")
       }else{
         alert("Invalid Crendentials")
         this.router.navigateByUrl("/login")
@@ -56,11 +56,14 @@ export class ApiCallerService {
   }
   checkSenderBalanceOd(amount:number):any {
     this.amount = amount
+    console.log("SenderObj1 "+this.senderObj)
+    console.log("Amount "+this.amount)
     if(this.senderObj.overdraft=="yes") {
+      console.log("SenderObj: "+this.senderObj)
       return "GREEN"
     }
     else {
-      if(this.senderObj.balance>=amount) {
+      if(this.senderObj.balance>=Number(amount) && this.senderObj.overdraft=="no") {
         return "GREEN"
       }
       else {

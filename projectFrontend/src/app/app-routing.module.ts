@@ -9,7 +9,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 const routes: Routes = [
   {path:"", component:LoginComponent},
   {path:"login", component:LoginComponent},
-  {path:"forms", component:FormsComponent},
+  // {path:"forms", component:FormsComponent},
   {path:"sender", component:SenderComponent},
   {path:"receiver", component:ReceiverComponent},
   {path:"transaction", component:TransactionComponent}

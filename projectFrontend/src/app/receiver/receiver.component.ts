@@ -14,7 +14,7 @@ export class ReceiverComponent implements OnInit {
   receiverBic = ""
   receiverBank = ""
   messageCode = ""
-  amount!:number
+  amount:number=0
   terrorStatus = false
   receiverOk = true
   balanceStatus = false
@@ -42,7 +42,7 @@ export class ReceiverComponent implements OnInit {
         //   window.location.reload();
         // });
       }
-      else {
+      else {  
         this.terrorStatus = false 
         this.receiverOk = true 
       }
@@ -70,7 +70,7 @@ export class ReceiverComponent implements OnInit {
       this.amount = 0
       alert("Please Enter a Valid Amount")
     }
-    if(this.apiCaller.checkSenderBalanceOd(this.amount)=="GREEN") {
+    if(this.apiCaller.checkSenderBalanceOd(this.amount)==="GREEN") {
       this.balanceStatus = true
     }
     else {
@@ -79,12 +79,14 @@ export class ReceiverComponent implements OnInit {
   }
 
   proceedToTransaction():void {
-    if(this.receiverAccNo=="" || this.receiverBank=="" || this.receiverBic=="" || this.receiverName=="" || this.messageCode=="")
+    if(this.receiverAccNo=="" || this.receiverBank=="" || this.receiverBic=="" || this.receiverName=="" || this.messageCode=="" || this.amount>=0)
     alert("Please Enter all the fields correctly"!)
     else {
+      console.log(this.amount)
       this.apiCaller.setReceiverAccNo(this.receiverAccNo)
       this.apiCaller.setmessageCode(this.messageCode)
       if(this.receiverOk==true && this.terrorStatus==false && this.balanceStatus==true) {
+        console.log("BalanceStatus1 "+this.balanceStatus)
         this.apiCaller.setStatusFlag("success")
         // this.router.navigate(['/transaction'])
         this.router.navigate(['/transaction'])
@@ -92,6 +94,7 @@ export class ReceiverComponent implements OnInit {
       else {
         // this.cancel = true
         if(this.balanceStatus==false && this.terrorStatus==false) {
+          console.log("BalanceStatus2 "+this.balanceStatus)
           this.apiCaller.setStatusFlag("insufficientFunds")
           // this.router.navigate(['/transaction'])
           this.router.navigate(['/transaction'])
