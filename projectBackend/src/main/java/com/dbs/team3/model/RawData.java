@@ -9,11 +9,11 @@ public class RawData {
 	
 	public static List<String> ofacList = new ArrayList<String>();
 	static {
-		ofacList.add("ANUPAMA N");
-		ofacList.add("AJAY SHAMU KUMAR");
-		ofacList.add("B A SANTOSH");
-		ofacList.add("ANIL KUMAR NAGARAJ");
-		ofacList.add("AKSHAYA WEALTH MANAGEMENT (P) LTD");
+		ofacList.add("SRAVANI");
+		ofacList.add("AMREEN");
+		ofacList.add("DEEKSHITHA");
+		ofacList.add("YASHASH");
+		ofacList.add("MANIDEEP");
 	}
 	
 	public static Map<String,String> messageMap = new HashMap<String,String>();
