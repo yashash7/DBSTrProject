@@ -14,7 +14,7 @@ export class ReceiverComponent implements OnInit {
   receiverBic = ""
   receiverBank = ""
   messageCode = ""
-  amount:number=0
+  amount!:number;
   terrorStatus = false
   receiverOk = true
   balanceStatus = false
@@ -36,7 +36,7 @@ export class ReceiverComponent implements OnInit {
       if(data=="RED") {
         this.terrorStatus = true // terrorStatus true means, receiver name is present in Terror List
         this.receiverOk = false // receiverOk status false means receiver is invalid cannot send amount
-        // alert("Receiver Name is in 'OFAC' List; Aborting Transaction!")
+        // alert("Receiver Name is in 'OFAC' List; Please check!")
         // this.router.navigate(['/sender'])
         // .then(() => {
         //   window.location.reload();
@@ -66,11 +66,10 @@ export class ReceiverComponent implements OnInit {
   }
 
   checkBalanceOrOd():void {
-    if(this.amount<0) {
-      this.amount = 0
+    if(this.amount<=0) {
       alert("Please Enter a Valid Amount")
     }
-    if(this.apiCaller.checkSenderBalanceOd(this.amount)==="GREEN") {
+    else if(this.apiCaller.checkSenderBalanceOd(this.amount)==="GREEN") {
       this.balanceStatus = true
     }
     else {
@@ -79,7 +78,7 @@ export class ReceiverComponent implements OnInit {
   }
 
   proceedToTransaction():void {
-    if(this.receiverAccNo=="" || this.receiverBank=="" || this.receiverBic=="" || this.receiverName=="" || this.messageCode=="" || this.amount>=0)
+    if(this.receiverAccNo=="" || this.receiverBank=="" || this.receiverBic=="" || this.receiverName=="" || this.messageCode=="" || this.amount<=0)
     alert("Please Enter all the fields correctly"!)
     else {
       console.log(this.amount)

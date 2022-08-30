@@ -35,9 +35,9 @@ public class JPAService {
 	Customer sender = new Customer();
 	static int trId = 101;
 	String status;
-	Date javaTimeStamp = new Date();
 	
 	public List<Transaction> doTransaction(List<String> missing) {
+		Date javaTimeStamp = new Date();
 		transaction.setTimeStamp(javaTimeStamp.toInstant().toString());
 		//Setting messageCode
 		transaction.setReceiverAccNo(missing.get(3));

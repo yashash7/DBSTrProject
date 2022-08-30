@@ -37,7 +37,7 @@ export class TransactionComponent implements OnInit {
   }
 
   goToForms() {
-    this.router.navigateByUrl("/forms")
+    this.router.navigateByUrl("/sender")
   }
 
 }
